@@ -476,22 +476,210 @@ SOAP note:
         return soap_results
     
     def extract_from_lab_result(self, lab_result_path: str,
-                                confidence: float = 0.70) -> Dict[str, Dict[str, Any]]:
+                                confidence: float = 0.70,
+                                already_filled: Optional[Dict[str, Dict[str, Any]]] = None,
+                                use_ocr_fallback: bool = True,
+                                ocr_dpi: int = 200) -> Dict[str, Dict[str, Any]]:
         """
         Extract information from scanned lab result PDF.
         
         Args:
             lab_result_path: Path to lab result PDF file
             confidence: Confidence score for OCR-extracted source
+            already_filled: Existing extracted results (e.g., from demographics + SOAP). Any already-filled
+                field keys will not be overwritten (completion-only).
+            use_ocr_fallback: If True, attempt OCR if the PDF appears to have no embedded text.
+            ocr_dpi: DPI to render pages for OCR if needed
             
         Returns:
             Dictionary mapping schema field names to extracted values with metadata
             
-        Note: This is a placeholder for future OCR + AI extraction.
+        Notes (per problem.md):
+        - This is intentionally generic and optional. The PDF can contain anything; we avoid overfitting.
+        - We first try embedded text extraction; only if that fails do we fall back to OCR.
+        - We only fill fields that remain missing after earlier sources.
         """
-        # TODO: Implement OCR + AI extraction from lab results
-        # For now, return empty dict
-        return {}
+        already_filled = already_filled or {}
+
+        def _is_filled(field_key: str) -> bool:
+            obj = already_filled.get(field_key)
+            if not isinstance(obj, dict):
+                return False
+            v = obj.get("value")
+            return v is not None and str(v).strip() != ""
+
+        def _make_obj(value, evidence, reasoning, conf):
+            return {
+                "value": value,
+                "source": "lab_result.pdf",
+                "confidence": float(conf),
+                "reasoning": reasoning,
+                "evidence": evidence,
+            }
+
+        # -----------------------------
+        # Extract text: embedded first, OCR fallback if needed
+        # -----------------------------
+        text = ""
+        used_ocr = False
+        try:
+            import fitz  # PyMuPDF
+            doc = fitz.open(lab_result_path)
+            parts = []
+            for i in range(doc.page_count):
+                parts.append(doc[i].get_text("text") or "")
+            text = "\n".join(parts).strip()
+        except Exception:
+            text = ""
+
+        if use_ocr_fallback and len(text) < 50:
+            try:
+                import fitz  # PyMuPDF
+                from PIL import Image
+                import pytesseract
+                import io
+
+                doc = fitz.open(lab_result_path)
+                ocr_parts = []
+                for i in range(doc.page_count):
+                    pix = doc[i].get_pixmap(dpi=ocr_dpi)
+                    img = Image.open(io.BytesIO(pix.tobytes("png")))
+                    ocr_parts.append(pytesseract.image_to_string(img) or "")
+                text = "\n".join(ocr_parts).strip()
+                used_ocr = True
+            except Exception:
+                # OCR is optional; if unavailable, just return empty results.
+                return {}
+
+        if not text:
+            # No embedded text and OCR unavailable/failed
+            return {}
+
+        # Normalize whitespace for matching
+        text_norm = re.sub(r"\s+", " ", text).strip()
+        lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+
+        base_conf = 0.65 if used_ocr else confidence
+
+        results: Dict[str, Dict[str, Any]] = {}
+
+        # -----------------------------
+        # Generic medication extraction (common in letters/lab reports)
+        # Fill only medication_* fields that are still missing.
+        # -----------------------------
+        # Look for a "Medication:" section and capture subsequent bullet-ish lines.
+        med_lines: list[str] = []
+        in_meds = False
+        current = ""
+        for ln in lines:
+            if re.match(r"^Medication\s*:\s*$", ln, re.IGNORECASE):
+                in_meds = True
+                current = ""
+                continue
+            if in_meds and re.match(r"^[A-Za-z][A-Za-z /-]*:\s*$", ln) and not re.match(r"^Medication\s*:\s*$", ln, re.IGNORECASE):
+                # next section started
+                break
+            if in_meds:
+                # bullets can appear as '•' or '-' or just wrapped text
+                if ln.startswith(("•", "-", "*")):
+                    if current:
+                        med_lines.append(current.strip())
+                    current = ln.lstrip("•-* ").strip()
+                else:
+                    if current:
+                        current += " " + ln.strip()
+                    else:
+                        current = ln.strip()
+        if in_meds and current:
+            med_lines.append(current.strip())
+
+        # Extract (name, dose_mg, freq_text) from each med line.
+        # Keep this generic and conservative: require an explicit numeric mg dose.
+        extracted_meds: list[tuple[str, str, str, str]] = []
+        freq_patterns = [
+            r"once\s+a\s+day",
+            r"twice\s+a\s+day",
+            r"three\s+times\s+a\s+day",
+            r"daily",
+            r"every\s+day",
+            r"\bBID\b",
+            r"\bTID\b",
+            r"\bQID\b",
+            r"\bPRN\b",
+            r"as\s+needed",
+        ]
+        freq_re = re.compile("|".join(freq_patterns), re.IGNORECASE)
+        for ln in med_lines:
+            # Example: "Aspirin 81 mg once a day ..."
+            m = re.search(r"\b([A-Z][A-Za-z0-9/-]{2,}(?:\s+[A-Z][A-Za-z0-9/-]{2,})*)\b\s+(\d+(?:\.\d+)?)\s*mg\b", ln)
+            if not m:
+                continue
+            name = m.group(1).strip()
+            dose = m.group(2).strip()  # numeric mg
+
+            freq_m = freq_re.search(ln)
+            freq = freq_m.group(0).strip() if freq_m else ""
+
+            extracted_meds.append((name, dose, freq, ln))
+
+        # Fill medication slots 1..5, but only empty ones (completion-only).
+        # Prefer not to overwrite soap-provided nitroglycerin in med_1 if already filled.
+        slot_idx = 1
+        for name, dose, freq, evidence in extracted_meds:
+            # Find next available slot where name is missing
+            while slot_idx <= 5 and _is_filled(f"medication_{slot_idx}_name"):
+                slot_idx += 1
+            if slot_idx > 5:
+                break
+
+            name_key = f"medication_{slot_idx}_name"
+            dose_key = f"medication_{slot_idx}_dose"
+            often_key = f"medication_{slot_idx}_often"
+
+            if name_key in self.schema and not _is_filled(name_key):
+                results[name_key] = _make_obj(
+                    value=name,
+                    evidence=evidence,
+                    reasoning="extracted from lab_result medication section",
+                    conf=base_conf,
+                )
+            if dose_key in self.schema and not _is_filled(dose_key):
+                results[dose_key] = _make_obj(
+                    value=dose,
+                    evidence=evidence,
+                    reasoning="extracted numeric mg dose from lab_result medication section",
+                    conf=base_conf,
+                )
+            if often_key in self.schema and not _is_filled(often_key) and freq:
+                results[often_key] = _make_obj(
+                    value=freq.lower(),
+                    evidence=evidence,
+                    reasoning="extracted frequency phrase from lab_result medication section",
+                    conf=base_conf,
+                )
+
+            slot_idx += 1
+
+        # -----------------------------
+        # Generic phone extraction (optional; only fills if missing)
+        # -----------------------------
+        phones = re.findall(r"\b(\d{3})[-.\s]?(\d{3})[-.\s]?(\d{4})\b", text)
+        # If multiple phones, we don't guess which is home vs cell; only fill if fields are empty AND only one phone found.
+        if len(phones) == 1:
+            area, first3, last4 = phones[0]
+            # Prefer cell_phone group if missing; otherwise home_phone.
+            cell_fields = ["cell_phone_area_code", "cell_phone_first3", "cell_phone_last4"]
+            home_fields = ["home_phone_area_code", "home_phone_first3", "home_phone_last4"]
+            if all((f in self.schema and not _is_filled(f)) for f in cell_fields):
+                results[cell_fields[0]] = _make_obj(area, f"{area}-{first3}-{last4}", "parsed phone from lab_result", base_conf)
+                results[cell_fields[1]] = _make_obj(first3, f"{area}-{first3}-{last4}", "parsed phone from lab_result", base_conf)
+                results[cell_fields[2]] = _make_obj(last4, f"{area}-{first3}-{last4}", "parsed phone from lab_result", base_conf)
+            elif all((f in self.schema and not _is_filled(f)) for f in home_fields):
+                results[home_fields[0]] = _make_obj(area, f"{area}-{first3}-{last4}", "parsed phone from lab_result", base_conf)
+                results[home_fields[1]] = _make_obj(first3, f"{area}-{first3}-{last4}", "parsed phone from lab_result", base_conf)
+                results[home_fields[2]] = _make_obj(last4, f"{area}-{first3}-{last4}", "parsed phone from lab_result", base_conf)
+
+        return results
     
     def combine_extractions(self, *extraction_results: Dict[str, Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
         """
