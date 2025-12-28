@@ -36,6 +36,11 @@ This project implements a **pragmatic end-to-end slice**:
   - Use **widget bounding boxes** via `PyMuPDF` for spatial metadata
   - Normalize field keys and add lightweight grouping (e.g., split date fields into `*_day/_month/_year`, phone into `area_code/first3/last4`, medication slots)
 
+**Scanned/non-fillable fallback (not used in `main.ipynb`)**
+- Implemented in `src/scanned_schema_extraction.py`
+- Uses **OCR + simple layout parsing** to propose text-field bboxes and labels for `form_scanned.pdf`.
+- Not wired into the notebook because the current form is fillable and metadata extraction is more reliable; the code exists as a fallback for other PDF formats where AcroForm fields are unavailable.
+
 #### **2) Multi-source information extraction (`answers.json`)**
 Implemented in `src/information_extraction.py`:
 - **Demographics (anchor)**: deterministic mapping + parsing (phones/DOB/address)
@@ -119,7 +124,7 @@ Open and run `main.ipynb` top-to-bottom. It will produce:
 ---
 
 ### Next steps (if more time/resources)
-- Support `form_scanned.pdf` with OCR + layout parsing (e.g., LayoutParser) and alignment to schema fields.
+- Improve scanned-form schema extraction quality (more robust box detection + label association) and align its bboxes to a consistent coordinate system across PDF/image rendering.
 - Expand checkbox/radio/choice population with safe option mapping + confidence.
 - Improve diagnosis normalization (e.g., “stable angina” vs longer phrase) while keeping evidence intact.
 - Add a small “golden” ground truth set and compute precision/recall on a few target fields.
