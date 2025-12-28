@@ -1,0 +1,146 @@
+{
+  "patient_name_last_first_middle_initial": {
+    "value": "Peter Julius Fern",
+    "source": "demographics.json",
+    "reasoning": "direct",
+    "confidence": 0.95
+  },
+  "date_of_birth_dd": {
+    "value": "15",
+    "source": "demographics.json",
+    "reasoning": "date_parse.day",
+    "confidence": 0.95
+  },
+  "date_of_birth_mm": {
+    "value": "04",
+    "source": "demographics.json",
+    "reasoning": "date_parse.month",
+    "confidence": 0.95
+  },
+  "date_of_birth_yyyy": {
+    "value": "1960",
+    "source": "demographics.json",
+    "reasoning": "date_parse.year",
+    "confidence": 0.95
+  },
+  "home_phone_area_code": {
+    "value": "613",
+    "source": "demographics.json",
+    "reasoning": "phone_parse.area_code",
+    "confidence": 0.95
+  },
+  "home_phone_first3": {
+    "value": "656",
+    "source": "demographics.json",
+    "reasoning": "phone_parse.first3",
+    "confidence": 0.95
+  },
+  "home_phone_last4": {
+    "value": "5890",
+    "source": "demographics.json",
+    "reasoning": "phone_parse.last4",
+    "confidence": 0.95
+  },
+  "cell_phone_area_code": {
+    "value": "647",
+    "source": "demographics.json",
+    "reasoning": "phone_parse.area_code",
+    "confidence": 0.95
+  },
+  "cell_phone_first3": {
+    "value": "666",
+    "source": "demographics.json",
+    "reasoning": "phone_parse.first3",
+    "confidence": 0.95
+  },
+  "cell_phone_last4": {
+    "value": "8888",
+    "source": "demographics.json",
+    "reasoning": "phone_parse.last4",
+    "confidence": 0.95
+  },
+  "address_street_city_province_postal_code": {
+    "value": "45 Maple Ave, Toronto, ON, K7L 3V8",
+    "source": "demographics.json",
+    "reasoning": "address_format",
+    "confidence": 0.95
+  },
+  "primary_1": {
+    "value": "stable angina given exertional pattern and resolution w/ rest",
+    "source": "soap_notes.txt",
+    "reasoning": "extracted from Assessment section",
+    "confidence": 0.75
+  },
+  "primary_2": {
+    "value": "Hypertension",
+    "source": "soap_notes.txt",
+    "reasoning": "extracted from Assessment section",
+    "confidence": 0.75
+  },
+  "secondary_and_or_complications_1": {
+    "value": "GERD",
+    "source": "soap_notes.txt",
+    "reasoning": "extracted from Assessment section",
+    "confidence": 0.75
+  },
+  "secondary_and_or_complications_2": {
+    "value": "Hyperlipidemia",
+    "source": "soap_notes.txt",
+    "reasoning": "extracted from Assessment section",
+    "confidence": 0.75
+  },
+  "medication_1_name": {
+    "value": "nitroglycerin",
+    "source": "soap_notes.txt",
+    "reasoning": "explicitly stated in Plan section",
+    "confidence": 0.8
+  },
+  "medication_1_often": {
+    "value": "PRN exertional discomfort",
+    "source": "soap_notes.txt",
+    "reasoning": "derived from Plan instruction wording",
+    "confidence": 0.7
+  },
+  "medication_2_name": {
+    "value": "Aspirin",
+    "source": "lab_result.pdf",
+    "reasoning": "extracted from lab_result medication section",
+    "confidence": 0.7
+  },
+  "medication_2_dose": {
+    "value": "81",
+    "source": "lab_result.pdf",
+    "reasoning": "extracted numeric mg dose from lab_result medication section",
+    "confidence": 0.7
+  },
+  "medication_2_often": {
+    "value": "once a day",
+    "source": "lab_result.pdf",
+    "reasoning": "extracted frequency phrase from lab_result medication section",
+    "confidence": 0.7
+  },
+  "medication_3_name": {
+    "value": "Metoprolol",
+    "source": "lab_result.pdf",
+    "reasoning": "extracted from lab_result medication section",
+    "confidence": 0.7
+  },
+  "medication_3_dose": {
+    "value": "25",
+    "source": "lab_result.pdf",
+    "reasoning": "extracted numeric mg dose from lab_result medication section",
+    "confidence": 0.7
+  },
+  "medication_3_often": {
+    "value": "twice daily",
+    "source": "lab_result.pdf",
+    "reasoning": "extracted frequency phrase from lab_result medication section",
+    "confidence": 0.7
+  },
+  "medication_1_dose": {
+    "value": "0.4",
+    "source": "lab_result.pdf",
+    "reasoning": "extracted numeric mg dose from lab_result medication section",
+    "confidence": 0.7
+  }
+}

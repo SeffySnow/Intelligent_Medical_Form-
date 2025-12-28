@@ -600,6 +600,8 @@ SOAP note:
             r"once\s+a\s+day",
             r"twice\s+a\s+day",
             r"three\s+times\s+a\s+day",
+            r"twice\s+daily",
+            r"once\s+daily",
             r"daily",
             r"every\s+day",
             r"\bBID\b",
@@ -622,15 +624,36 @@ SOAP note:
 
             extracted_meds.append((name, dose, freq, ln))
 
-        # Fill medication slots 1..5, but only empty ones (completion-only).
-        # Prefer not to overwrite soap-provided nitroglycerin in med_1 if already filled.
-        slot_idx = 1
+        def _norm_med_name(s: str) -> str:
+            return re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
+
+        def _find_existing_med_slot(norm_name: str) -> Optional[int]:
+            # Check already-filled + what we've added in this function so far.
+            for i in range(1, 6):
+                k = f"medication_{i}_name"
+                existing = None
+                if k in results and isinstance(results[k], dict):
+                    existing = results[k].get("value")
+                if existing is None and k in already_filled and isinstance(already_filled[k], dict):
+                    existing = already_filled[k].get("value")
+                if existing and _norm_med_name(str(existing)) == norm_name:
+                    return i
+            return None
+
+        def _find_next_empty_slot() -> Optional[int]:
+            for i in range(1, 6):
+                if not _is_filled(f"medication_{i}_name") and f"medication_{i}_name" not in results:
+                    return i
+            return None
+
+        # Fill medication slots 1..5, deduping by normalized medication name.
         for name, dose, freq, evidence in extracted_meds:
-            # Find next available slot where name is missing
-            while slot_idx <= 5 and _is_filled(f"medication_{slot_idx}_name"):
-                slot_idx += 1
-            if slot_idx > 5:
-                break
+            norm_name = _norm_med_name(name)
+            slot_idx = _find_existing_med_slot(norm_name)
+            if slot_idx is None:
+                slot_idx = _find_next_empty_slot()
+            if slot_idx is None:
+                break  # no available slots
 
             name_key = f"medication_{slot_idx}_name"
             dose_key = f"medication_{slot_idx}_dose"
@@ -657,8 +680,6 @@ SOAP note:
                     reasoning="extracted frequency phrase from lab_result medication section",
                     conf=base_conf,
                 )
-
-            slot_idx += 1
 
         # -----------------------------
         # Generic phone extraction (optional; only fills if missing)
