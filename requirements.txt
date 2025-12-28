@@ -1,0 +1,12 @@
+PyMuPDF==1.26.7
+pypdf>=4.0.0
+torch>=2.0.0
+transformers>=4.45.0
+accelerate>=0.24.0
+sentencepiece>=0.1.99
+protobuf>=3.20.0
+ipywidgets>=8.0.0
+
+# Note (SOAP extraction):
+# - Uses a small open-source instruct LLM via transformers (default: Qwen/Qwen2.5-3B-Instruct).
+# - On first run, the model/tokenizer are cached under ./models/ so subsequent runs do not re-download.

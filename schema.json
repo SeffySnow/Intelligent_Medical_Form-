@@ -1,0 +1,737 @@
+{
+  "home_phone_area_code": {
+    "label": "Home Phone # (+ Area Code)",
+    "type": "text",
+    "bbox": [
+      325.47198486328125,
+      171.49102783203125,
+      352.29400634765625,
+      187.61700439453125
+    ],
+    "normalized_name": "home_phone_area_code",
+    "pdf_name": "APS1. areacode",
+    "page": 0,
+    "group": "home_phone",
+    "part": "area_code"
+  },
+  "address_street_city_province_postal_code": {
+    "label": "Address (Street, City, Province, Postal Code)",
+    "type": "text",
+    "bbox": [
+      33.347599029541016,
+      202.63397216796875,
+      579.8189697265625,
+      218.760009765625
+    ],
+    "normalized_name": "address_street_city_province_postal_code",
+    "pdf_name": "APS1.Address",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "certificate_if_applicable": {
+    "label": "Certificate # (if applicable)",
+    "type": "text",
+    "bbox": [
+      359.2749938964844,
+      235.87200927734375,
+      462.77899169921875,
+      251.9990234375
+    ],
+    "normalized_name": "certificate_if_applicable",
+    "pdf_name": "APS1.Cert",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "contract_or_policy": {
+    "label": "Contract or Policy #",
+    "type": "text",
+    "bbox": [
+      248.875,
+      235.87200927734375,
+      352.3789978027344,
+      251.9990234375
+    ],
+    "normalized_name": "contract_or_policy",
+    "pdf_name": "APS1.Contract",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "date_last_day": {
+    "label": "Date Last Worked (dd)",
+    "type": "text",
+    "bbox": [
+      34.16939926147461,
+      267.28997802734375,
+      52.98442077636719,
+      283.4169921875
+    ],
+    "normalized_name": "date_last_day",
+    "pdf_name": "APS1.Date_last_d",
+    "page": 0,
+    "group": "date_last",
+    "part": "day"
+  },
+  "date_last_month": {
+    "label": "Date Last Worked (mm)",
+    "type": "text",
+    "bbox": [
+      59.266300201416016,
+      267.28997802734375,
+      76.87339782714844,
+      283.4169921875
+    ],
+    "normalized_name": "date_last_month",
+    "pdf_name": "APS1.Date_last_m",
+    "page": 0,
+    "group": "date_last",
+    "part": "month"
+  },
+  "date_last_year": {
+    "label": "Date Last Worked (yyyy)",
+    "type": "text",
+    "bbox": [
+      82.82438659667969,
+      267.28997802734375,
+      120.81999969482422,
+      283.4169921875
+    ],
+    "normalized_name": "date_last_year",
+    "pdf_name": "APS1.Date_last_y",
+    "page": 0,
+    "group": "date_last",
+    "part": "year"
+  },
+  "date_of_birth_dd": {
+    "label": "Date of Birth (dd)",
+    "type": "text",
+    "bbox": [
+      470.9679870605469,
+      235.87200927734375,
+      489.7829895019531,
+      251.9990234375
+    ],
+    "normalized_name": "date_of_birth_dd",
+    "pdf_name": "APS1.Date_of_birth_d",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "date_of_birth_mm": {
+    "label": "Date of Birth (mm)",
+    "type": "text",
+    "bbox": [
+      496.06500244140625,
+      235.87200927734375,
+      513.6719970703125,
+      251.9990234375
+    ],
+    "normalized_name": "date_of_birth_mm",
+    "pdf_name": "APS1.Date_of_birth_m",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "date_of_birth_yyyy": {
+    "label": "Date of Birth (yyyy)",
+    "type": "text",
+    "bbox": [
+      519.6229858398438,
+      235.87200927734375,
+      557.6190185546875,
+      251.9990234375
+    ],
+    "normalized_name": "date_of_birth_yyyy",
+    "pdf_name": "APS1.Date_of_birth_y",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "date_return_day": {
+    "label": "Date Returned to Work or Expected Return to Work Date (dd)",
+    "type": "text",
+    "bbox": [
+      249.73300170898438,
+      267.28997802734375,
+      268.5480041503906,
+      283.4169921875
+    ],
+    "normalized_name": "date_return_day",
+    "pdf_name": "APS1.Date_return_d",
+    "page": 0,
+    "group": "date_return",
+    "part": "day"
+  },
+  "date_return_month": {
+    "label": "Date Returned to Work or Expected Return to Work Date (mm)",
+    "type": "text",
+    "bbox": [
+      274.8290100097656,
+      267.28997802734375,
+      292.43701171875,
+      283.4169921875
+    ],
+    "normalized_name": "date_return_month",
+    "pdf_name": "APS1.Date_return_m",
+    "page": 0,
+    "group": "date_return",
+    "part": "month"
+  },
+  "date_return_year": {
+    "label": "Date Returned to Work or Expected Return to Work Date (yyyy)",
+    "type": "text",
+    "bbox": [
+      298.38800048828125,
+      267.28997802734375,
+      336.38299560546875,
+      283.4169921875
+    ],
+    "normalized_name": "date_return_year",
+    "pdf_name": "APS1.Date_return_y",
+    "page": 0,
+    "group": "date_return",
+    "part": "year"
+  },
+  "medication_1_dose": {
+    "label": "Dosage (mg) (1)",
+    "type": "text",
+    "bbox": [
+      291.38299560546875,
+      316.5249938964844,
+      370.44000244140625,
+      330.4700012207031
+    ],
+    "normalized_name": "medication_1_dose",
+    "pdf_name": "APS1.Dose1",
+    "page": 0,
+    "group": "medication_1",
+    "part": "dose"
+  },
+  "medication_2_dose": {
+    "label": "Dosage (mg) (2)",
+    "type": "text",
+    "bbox": [
+      291.38299560546875,
+      332.6709899902344,
+      370.44000244140625,
+      346.614990234375
+    ],
+    "normalized_name": "medication_2_dose",
+    "pdf_name": "APS1.Dose2",
+    "page": 0,
+    "group": "medication_2",
+    "part": "dose"
+  },
+  "medication_3_dose": {
+    "label": "Dosage (mg) (3)",
+    "type": "text",
+    "bbox": [
+      291.38299560546875,
+      348.27099609375,
+      370.44000244140625,
+      362.2149963378906
+    ],
+    "normalized_name": "medication_3_dose",
+    "pdf_name": "APS1.Dose3",
+    "page": 0,
+    "group": "medication_3",
+    "part": "dose"
+  },
+  "medication_4_dose": {
+    "label": "Dosage (mg) (4)",
+    "type": "text",
+    "bbox": [
+      291.38299560546875,
+      364.3070068359375,
+      370.44000244140625,
+      378.2510070800781
+    ],
+    "normalized_name": "medication_4_dose",
+    "pdf_name": "APS1.Dose4",
+    "page": 0,
+    "group": "medication_4",
+    "part": "dose"
+  },
+  "medication_5_dose": {
+    "label": "Dosage (mg) (5)",
+    "type": "text",
+    "bbox": [
+      291.38299560546875,
+      380.2340087890625,
+      370.44000244140625,
+      394.1789855957031
+    ],
+    "normalized_name": "medication_5_dose",
+    "pdf_name": "APS1.Dose5",
+    "page": 0,
+    "group": "medication_5",
+    "part": "dose"
+  },
+  "employer_s_name_if_applicable": {
+    "label": "Employer\u2019s Name (if applicable)",
+    "type": "text",
+    "bbox": [
+      32.69309997558594,
+      235.87298583984375,
+      241.71200561523438,
+      251.9990234375
+    ],
+    "normalized_name": "employer_s_name_if_applicable",
+    "pdf_name": "APS1.Employer Name",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "patient_name_last_first_middle_initial": {
+    "label": "Patient Name (Last, First, Middle Initial)",
+    "type": "text",
+    "bbox": [
+      32.69309997558594,
+      171.49102783203125,
+      319.1619873046875,
+      187.61700439453125
+    ],
+    "normalized_name": "patient_name_last_first_middle_initial",
+    "pdf_name": "APS1.First Name",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "dominant_hand": {
+    "label": "Dominant Hand:",
+    "type": "button",
+    "bbox": [
+      496.3089904785156,
+      385.35198974609375,
+      506.5790100097656,
+      395.8280029296875
+    ],
+    "normalized_name": "dominant_hand",
+    "pdf_name": "APS1.Hand",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "please_provide_your_height": {
+    "label": "Please provide your Height",
+    "type": "text",
+    "bbox": [
+      510.37799072265625,
+      316.5249938964844,
+      576.2620239257812,
+      330.4700012207031
+    ],
+    "normalized_name": "please_provide_your_height",
+    "pdf_name": "APS1.Height",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "medication_1_name": {
+    "label": "Name of Medication (1)",
+    "type": "text",
+    "bbox": [
+      49.20209884643555,
+      316.5249938964844,
+      278.2590026855469,
+      330.4700012207031
+    ],
+    "normalized_name": "medication_1_name",
+    "pdf_name": "APS1.Medication1",
+    "page": 0,
+    "group": "medication_1",
+    "part": "name"
+  },
+  "medication_2_name": {
+    "label": "Name of Medication (2)",
+    "type": "text",
+    "bbox": [
+      49.20209884643555,
+      332.6709899902344,
+      278.2590026855469,
+      346.614990234375
+    ],
+    "normalized_name": "medication_2_name",
+    "pdf_name": "APS1.Medication2",
+    "page": 0,
+    "group": "medication_2",
+    "part": "name"
+  },
+  "medication_3_name": {
+    "label": "Name of Medication (3)",
+    "type": "text",
+    "bbox": [
+      49.20209884643555,
+      348.27099609375,
+      278.2590026855469,
+      362.2149963378906
+    ],
+    "normalized_name": "medication_3_name",
+    "pdf_name": "APS1.Medication3",
+    "page": 0,
+    "group": "medication_3",
+    "part": "name"
+  },
+  "medication_4_name": {
+    "label": "Name of Medication (4)",
+    "type": "text",
+    "bbox": [
+      49.85660171508789,
+      364.3070068359375,
+      278.91400146484375,
+      378.2510070800781
+    ],
+    "normalized_name": "medication_4_name",
+    "pdf_name": "APS1.Medication4",
+    "page": 0,
+    "group": "medication_4",
+    "part": "name"
+  },
+  "medication_5_name": {
+    "label": "Name of Medication (5)",
+    "type": "text",
+    "bbox": [
+      49.20209884643555,
+      380.2340087890625,
+      278.2590026855469,
+      394.1789855957031
+    ],
+    "normalized_name": "medication_5_name",
+    "pdf_name": "APS1.Medication5",
+    "page": 0,
+    "group": "medication_5",
+    "part": "name"
+  },
+  "medication_1_often": {
+    "label": "How Often? (1)",
+    "type": "text",
+    "bbox": [
+      383.67401123046875,
+      316.5249938964844,
+      462.7309875488281,
+      330.4700012207031
+    ],
+    "normalized_name": "medication_1_often",
+    "pdf_name": "APS1.Often1",
+    "page": 0,
+    "group": "medication_1",
+    "part": "often"
+  },
+  "medication_2_often": {
+    "label": "How Often? (2)",
+    "type": "text",
+    "bbox": [
+      383.67401123046875,
+      332.6709899902344,
+      462.7309875488281,
+      346.614990234375
+    ],
+    "normalized_name": "medication_2_often",
+    "pdf_name": "APS1.Often2",
+    "page": 0,
+    "group": "medication_2",
+    "part": "often"
+  },
+  "medication_3_often": {
+    "label": "How Often? (3)",
+    "type": "text",
+    "bbox": [
+      383.67401123046875,
+      348.27099609375,
+      462.7309875488281,
+      362.2149963378906
+    ],
+    "normalized_name": "medication_3_often",
+    "pdf_name": "APS1.Often3",
+    "page": 0,
+    "group": "medication_3",
+    "part": "often"
+  },
+  "medication_4_often": {
+    "label": "How Often? (4)",
+    "type": "text",
+    "bbox": [
+      384.3290100097656,
+      365.6159973144531,
+      463.385986328125,
+      379.55999755859375
+    ],
+    "normalized_name": "medication_4_often",
+    "pdf_name": "APS1.Often4",
+    "page": 0,
+    "group": "medication_4",
+    "part": "often"
+  },
+  "medication_5_often": {
+    "label": "How Often? (5)",
+    "type": "text",
+    "bbox": [
+      383.67401123046875,
+      380.2340087890625,
+      462.7309875488281,
+      394.1789855957031
+    ],
+    "normalized_name": "medication_5_often",
+    "pdf_name": "APS1.Often5",
+    "page": 0,
+    "group": "medication_5",
+    "part": "often"
+  },
+  "please_provide_your_weight": {
+    "label": "Please provide your Weight",
+    "type": "text",
+    "bbox": [
+      510.37799072265625,
+      333.21600341796875,
+      576.2620239257812,
+      347.1600036621094
+    ],
+    "normalized_name": "please_provide_your_weight",
+    "pdf_name": "APS1.Weight",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "cell_phone_area_code": {
+    "label": "Cell Phone # (+ Area Code)",
+    "type": "text",
+    "bbox": [
+      456.0299987792969,
+      171.49102783203125,
+      482.85198974609375,
+      187.61700439453125
+    ],
+    "normalized_name": "cell_phone_area_code",
+    "pdf_name": "APS1.areacode1",
+    "page": 0,
+    "group": "cell_phone",
+    "part": "area_code"
+  },
+  "home_phone_first3": {
+    "label": "Home Phone # (First three numbers)",
+    "type": "text",
+    "bbox": [
+      362.2980041503906,
+      171.49102783203125,
+      390.03900146484375,
+      187.61700439453125
+    ],
+    "normalized_name": "home_phone_first3",
+    "pdf_name": "APS1.phoneA",
+    "page": 0,
+    "group": "home_phone",
+    "part": "first3"
+  },
+  "cell_phone_first3": {
+    "label": "Cell Phone # (First three numbers)",
+    "type": "text",
+    "bbox": [
+      492.8559875488281,
+      171.49102783203125,
+      520.5969848632812,
+      187.61700439453125
+    ],
+    "normalized_name": "cell_phone_first3",
+    "pdf_name": "APS1.phoneA1",
+    "page": 0,
+    "group": "cell_phone",
+    "part": "first3"
+  },
+  "home_phone_last4": {
+    "label": "Home Phone # (Last four numbers)",
+    "type": "text",
+    "bbox": [
+      399.8420104980469,
+      171.49102783203125,
+      435.0679931640625,
+      187.61700439453125
+    ],
+    "normalized_name": "home_phone_last4",
+    "pdf_name": "APS1.phoneB",
+    "page": 0,
+    "group": "home_phone",
+    "part": "last4"
+  },
+  "cell_phone_last4": {
+    "label": "Cell Phone # (Last four numbers)",
+    "type": "text",
+    "bbox": [
+      530.3989868164062,
+      171.49102783203125,
+      565.625,
+      187.61700439453125
+    ],
+    "normalized_name": "cell_phone_last4",
+    "pdf_name": "APS1.phoneB1",
+    "page": 0,
+    "group": "cell_phone",
+    "part": "last4"
+  },
+  "insurance_company": {
+    "label": "(Insurance Company)",
+    "type": "text",
+    "bbox": [
+      340.71099853515625,
+      411.4200134277344,
+      549.6240234375,
+      425.364013671875
+    ],
+    "normalized_name": "insurance_company",
+    "pdf_name": "APS2.Company_name",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "date_childbirth_day": {
+    "label": "If Childbirth - Expected or Actual Delivery Date (dd)",
+    "type": "text",
+    "bbox": [
+      269.80499267578125,
+      706.0015869140625,
+      288.6199951171875,
+      719.94580078125
+    ],
+    "normalized_name": "date_childbirth_day",
+    "pdf_name": "APS2.Date_Childbirth_d",
+    "page": 0,
+    "group": "date_childbirth",
+    "part": "day"
+  },
+  "date_childbirth_month": {
+    "label": "If Childbirth - Expected or Actual Delivery Date (mm)",
+    "type": "text",
+    "bbox": [
+      294.9020080566406,
+      706.0015869140625,
+      312.5090026855469,
+      719.94580078125
+    ],
+    "normalized_name": "date_childbirth_month",
+    "pdf_name": "APS2.Date_Childbirth_m",
+    "page": 0,
+    "group": "date_childbirth",
+    "part": "month"
+  },
+  "date_childbirth_year": {
+    "label": "If Childbirth - Expected or Actual Delivery Date (yyyy)",
+    "type": "text",
+    "bbox": [
+      318.4599914550781,
+      706.0015869140625,
+      356.45599365234375,
+      719.94580078125
+    ],
+    "normalized_name": "date_childbirth_year",
+    "pdf_name": "APS2.Date_Childbirth_y",
+    "page": 0,
+    "group": "date_childbirth",
+    "part": "year"
+  },
+  "delivery": {
+    "label": "Delivery",
+    "type": "button",
+    "bbox": [
+      467.0719909667969,
+      710.8792724609375,
+      477.3429870605469,
+      721.3560180664062
+    ],
+    "normalized_name": "delivery",
+    "pdf_name": "APS2.Delivery",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "primary_1": {
+    "label": "Primary (1)",
+    "type": "text",
+    "bbox": [
+      70.61380004882812,
+      635.22900390625,
+      579.5889892578125,
+      649.1729736328125
+    ],
+    "normalized_name": "primary_1",
+    "pdf_name": "APS2.Diagnosis_Primary1",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "primary_2": {
+    "label": "Primary (2)",
+    "type": "text",
+    "bbox": [
+      32.398399353027344,
+      651.35400390625,
+      579.5889892578125,
+      665.2979736328125
+    ],
+    "normalized_name": "primary_2",
+    "pdf_name": "APS2.Diagnosis_Primary2",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "secondary_and_or_complications_1": {
+    "label": "Secondary and/or Complications (1)",
+    "type": "text",
+    "bbox": [
+      170.1699981689453,
+      669.2650146484375,
+      580.635986328125,
+      683.208984375
+    ],
+    "normalized_name": "secondary_and_or_complications_1",
+    "pdf_name": "APS2.Diagnosis_Secondary1",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "secondary_and_or_complications_2": {
+    "label": "Secondary and/or Complications (2)",
+    "type": "text",
+    "bbox": [
+      33.44572067260742,
+      685.3900146484375,
+      580.635986328125,
+      699.3344116210938
+    ],
+    "normalized_name": "secondary_and_or_complications_2",
+    "pdf_name": "APS2.Diagnosis_Secondary2",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "i_am_the": {
+    "label": "I am the:",
+    "type": "button",
+    "bbox": [
+      162.5449981689453,
+      563.988037109375,
+      172.81500244140625,
+      574.4649658203125
+    ],
+    "normalized_name": "i_am_the",
+    "pdf_name": "APS2.Doctor",
+    "page": 0,
+    "group": null,
+    "part": null
+  },
+  "other_please_specify": {
+    "label": "Other (please specify)",
+    "type": "text",
+    "bbox": [
+      409.7659912109375,
+      560.219970703125,
+      575.8049926757812,
+      574.1640014648438
+    ],
+    "normalized_name": "other_please_specify",
+    "pdf_name": "APS2.Doctor_Other",
+    "page": 0,
+    "group": null,
+    "part": null
+  }
+}
