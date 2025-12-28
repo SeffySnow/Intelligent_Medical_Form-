@@ -68,9 +68,9 @@ def populate_fillable_pdf(
         text_targets[norm_key] = str(pdf_name)
 
     reader = PdfReader(form_pdf_path)
-    writer = PdfWriter()
-    for page in reader.pages:
-        writer.add_page(page)
+    # Important: preserve AcroForm structure/fields by cloning from the source PDF.
+    # If we just add pages to a fresh writer, the resulting PDF can lose form fields entirely.
+    writer = PdfWriter(clone_from=reader)
 
     # pypdf: make appearances show up in many viewers
     try:
@@ -106,7 +106,7 @@ def populate_fillable_pdf(
         to_fill[pdf_name] = value
         report.filled[norm_key] = value
 
-    # Apply values across all pages (pypdf internally handles only fields on each page)
+    # Apply values across all pages (some PDFs attach widget annotations per page)
     for page in writer.pages:
         try:
             writer.update_page_form_field_values(page, to_fill)
