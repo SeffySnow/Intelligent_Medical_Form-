@@ -15,4 +15,8 @@ venv/
 # Local model cache / large artifacts
 models/
 
+# Generated outputs (keep directory skeleton via .gitkeep)
+outputs/*
+!outputs/.gitkeep
+
 

@@ -3,6 +3,7 @@ Information extraction module for patient documents.
 
 This module extracts structured information from various patient documents
 (demographics.json, SOAP notes, lab results) and maps them to form schema fields.
+
 """
 
 import json

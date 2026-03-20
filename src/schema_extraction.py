@@ -37,7 +37,7 @@ class SchemaExtractor:
             "/Btn": "button",
             "/Ch": "choice",
             "/Sig": "signature",
-        }.get((ft or "").strip(), "unknown")
+        }.get((ft or "").strip(), "unknown") # unknown is the default value
     
     @staticmethod
     def is_parent_field(pdf_name: str, label: str, ft: str, bbox: Optional[list]) -> bool:
@@ -71,7 +71,7 @@ class SchemaExtractor:
     def detect_date_part(pdf_name: str) -> Optional[Tuple[str, str]]:
         """Detect if field is part of a date (day/month/year)."""
         # e.g. APS1.Date_of_birth_d
-        m = re.search(r"(date[_ ]?[a-z0-9]+)[_. ]([dmy])\b", pdf_name, re.IGNORECASE)
+        m = re.search(r"(date[\w]*)[_. ]([dmy])\b", pdf_name, re.IGNORECASE)
         if not m:
             return None
         date_key = SchemaExtractor.slugify(m.group(1))
